@@ -18,10 +18,7 @@ namespace SiteProjet.Controllers
         [HttpPost]
         public ActionResult Index(float taille, float poids)
         {
-            ServiceReference1.Service1Client svc = new ServiceReference1.Service1Client();
-            string s = svc.GetIMC(taille, poids);
             return RedirectToAction("Resultat", new { taille, poids });
-          
         }
 
 
@@ -30,7 +27,7 @@ namespace SiteProjet.Controllers
             ServiceReference1.Service1Client svc = new ServiceReference1.Service1Client();
             string s = svc.GetIMC( taille, poids);
             ViewData["res"] = s;
-            return View("Resultat");
+            return View();
         }
     }
 }
