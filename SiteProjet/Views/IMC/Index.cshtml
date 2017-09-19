@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <label>Taille</label>
+    <input type="text" name="taille"/>
+    <br />
+    <label>Poids</label>
+    <input type="text" name="poids" />
+    <input type="submit" value="Valider" />
+}

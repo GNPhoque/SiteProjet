@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Supprimer";
+}
+
+<h2>Cabinet médical - LES MEDECINS ASSOCIES</h2>
+
+<input type="button" value="Accueil" onclick="location.href='./Index'" />
+
+@{DateTime d = (DateTime)ViewData["jour"];}
+<p>Voulez-vous vraiment supprimer le rendez-vous de @ViewData["nomClient"] @ViewData["prenomClient"] le @d.ToShortDateString() @(ViewData["hDebut"])h@(ViewData["mDebut"])0-@ViewData["Hfin"]h@(ViewData["mFin"])0</p>
+
+@using (Html.BeginForm())
+{
+    <input hidden name="idRv" value="@ViewData["idRv"]" />
+    <input hidden name="idRv" value="@ViewData["idCr"]" />
+    <input type="submit" value="Supprimer" />
+    <input type="button" value="Annuler" onclick="location.href='./Index'" />
+}

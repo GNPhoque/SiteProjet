@@ -1,0 +1,57 @@
+﻿@model List< SiteProjet.Models.LocalDB.RV>
+
+@{
+    ViewBag.Title = "Calendrier";
+}
+
+<h2>Cabinet médical - LES MEDECINS ASSOCIES</h2>
+
+<input type="button" value="Accueil" onclick="location.href='./Index'" />
+
+@{DateTime d = (DateTime)ViewData["jour"];}
+<p>Rendez-vous de @ViewData["titreMed"] @ViewData["nomMed"] @ViewData["prenomMed"] le @d.ToShortDateString() </p>
+@Html.ActionLink("Jour précédent", "Calendrier", new { idMed = (int)ViewData["idMed"], jour = d })
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+@Html.ActionLink("Jour suivant", "Calendrier", new { idMed = (int)ViewData["idMed"], jour = d.AddDays(1) })
+<table>
+    <tr>
+        <th style="width:200px">
+            Créneau Horaire
+        </th>
+        <th style="width:300px">
+            Client
+        </th>
+        <th style="width:200px">
+            Action
+        </th>
+    </tr>
+    @for (int h = 8; h < 18;)
+    {
+        for (int m = 1; m != 0;)
+        {
+            <tr>
+                <td>
+                    @*Afficher les créneaux horaires par tranches de 20min*@
+                    @(h)h@(m = (m == 1 ? 0 : m))0 - @(h += (m + 2 == 6 ? 1 : 0))h@(m = (m + 2 == 6 ? 0 : m + 2))0
+                </td>
+                @{if (Model.Exists(x => x.CRENEAUX.HFIN == h && x.CRENEAUX.MFIN == m))
+                    {
+                        SiteProjet.Models.LocalDB.RV rv = Model.ToList().Single(x => x.CRENEAUX.HFIN == h && x.CRENEAUX.MFIN == m);
+                        <td>
+                            @rv.CLIENTS.TITRE @rv.CLIENTS.NOM @rv.CLIENTS.PRENOM
+                        </td>
+                        <td>
+                            @Html.ActionLink("Supprimer", "Supprimer", new { idRv = rv.ID, idCl = rv.CLIENTS.ID, idCr = rv.CRENEAUX.ID, jour = d })
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td>
+                            @Html.ActionLink("Réserver", "Reserver", new { idMed = ViewData["idMed"], hDebut = (m == 0 ? h - 1 : h), mdebut = (m == 0 ? 4 : m - 2), hFin = h, mFin = m, jour = d })
+                        </td>
+                    }}
+            </tr>
+                        }
+                    }
+</table>

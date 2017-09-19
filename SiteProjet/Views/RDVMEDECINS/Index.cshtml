@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}@model List<SiteProjet.Models.LocalDB.MEDECINS>
+
+<h2>Cabinet médical - LES MEDECINS ASSOCIES</h2>
+<p>
+    Prise de rendez-vous :
+</p>
+@using (Html.BeginForm("Calendrier", "RDVMEDECINS"))
+{
+    <label>Médecin</label>
+    <select name="idMed">
+        @foreach (var item in Model)
+        {
+            <option label="@item.TITRE @item.NOM @item.PRENOM">@item.ID</option>
+        }
+    </select>
+    <br />
+    <label>Date</label>
+    <input name="jour" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+    <br />
+    <input type="submit" value="Valider" />
+}

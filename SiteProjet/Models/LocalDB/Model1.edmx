@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBRDVMEDECINSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITRE" Type="varchar" MaxLength="50" />
+          <Property Name="NOM" Type="varchar" MaxLength="50" />
+          <Property Name="PRENOM" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CRENEAUX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HDEBUT" Type="int" />
+          <Property Name="MDEBUT" Type="int" />
+          <Property Name="HFIN" Type="int" />
+          <Property Name="MFIN" Type="int" />
+          <Property Name="ID_MEDECIN" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MEDECINS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITRE" Type="varchar" MaxLength="50" />
+          <Property Name="NOM" Type="varchar" MaxLength="50" />
+          <Property Name="PRENOM" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RV">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JOUR" Type="date" />
+          <Property Name="ID_CLIENT" Type="bigint" />
+          <Property Name="ID_CRENEAU" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__CRENEAUX__ID_MED__276EDEB3">
+          <End Role="MEDECINS" Type="Self.MEDECINS" Multiplicity="0..1" />
+          <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDECINS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CRENEAUX">
+              <PropertyRef Name="ID_MEDECIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RV__ID_CLIENT__2A4B4B5E">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+          <End Role="RV" Type="Self.RV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RV">
+              <PropertyRef Name="ID_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RV__ID_CRENEAU__2B3F6F97">
+          <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="0..1" />
+          <End Role="RV" Type="Self.RV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRENEAUX">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RV">
+              <PropertyRef Name="ID_CRENEAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBRDVMEDECINSModelStoreContainer">
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRENEAUX" EntityType="Self.CRENEAUX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEDECINS" EntityType="Self.MEDECINS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RV" EntityType="Self.RV" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CRENEAUX__ID_MED__276EDEB3" Association="Self.FK__CRENEAUX__ID_MED__276EDEB3">
+            <End Role="MEDECINS" EntitySet="MEDECINS" />
+            <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RV__ID_CLIENT__2A4B4B5E" Association="Self.FK__RV__ID_CLIENT__2A4B4B5E">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="RV" EntitySet="RV" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RV__ID_CRENEAU__2B3F6F97" Association="Self.FK__RV__ID_CRENEAU__2B3F6F97">
+            <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+            <End Role="RV" EntitySet="RV" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBRDVMEDECINSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RV" Relationship="Self.FK__RV__ID_CLIENT__2A4B4B5E" FromRole="CLIENTS" ToRole="RV" />
+        </EntityType>
+        <EntityType Name="CRENEAUX">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HDEBUT" Type="Int32" />
+          <Property Name="MDEBUT" Type="Int32" />
+          <Property Name="HFIN" Type="Int32" />
+          <Property Name="MFIN" Type="Int32" />
+          <Property Name="ID_MEDECIN" Type="Int64" />
+          <NavigationProperty Name="MEDECINS" Relationship="Self.FK__CRENEAUX__ID_MED__276EDEB3" FromRole="CRENEAUX" ToRole="MEDECINS" />
+          <NavigationProperty Name="RV" Relationship="Self.FK__RV__ID_CRENEAU__2B3F6F97" FromRole="CRENEAUX" ToRole="RV" />
+        </EntityType>
+        <EntityType Name="MEDECINS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRENOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CRENEAUX" Relationship="Self.FK__CRENEAUX__ID_MED__276EDEB3" FromRole="MEDECINS" ToRole="CRENEAUX" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RV">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JOUR" Type="DateTime" Precision="0" />
+          <Property Name="ID_CLIENT" Type="Int64" />
+          <Property Name="ID_CRENEAU" Type="Int64" />
+          <NavigationProperty Name="CLIENTS" Relationship="Self.FK__RV__ID_CLIENT__2A4B4B5E" FromRole="RV" ToRole="CLIENTS" />
+          <NavigationProperty Name="CRENEAUX" Relationship="Self.FK__RV__ID_CRENEAU__2B3F6F97" FromRole="RV" ToRole="CRENEAUX" />
+        </EntityType>
+        <Association Name="FK__RV__ID_CLIENT__2A4B4B5E">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+          <End Role="RV" Type="Self.RV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RV">
+              <PropertyRef Name="ID_CLIENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CRENEAUX__ID_MED__276EDEB3">
+          <End Role="MEDECINS" Type="Self.MEDECINS" Multiplicity="0..1" />
+          <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEDECINS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CRENEAUX">
+              <PropertyRef Name="ID_MEDECIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RV__ID_CRENEAU__2B3F6F97">
+          <End Role="CRENEAUX" Type="Self.CRENEAUX" Multiplicity="0..1" />
+          <End Role="RV" Type="Self.RV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRENEAUX">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RV">
+              <PropertyRef Name="ID_CRENEAU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBRDVMEDECINSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
+          <EntitySet Name="CRENEAUX" EntityType="Self.CRENEAUX" />
+          <EntitySet Name="MEDECINS" EntityType="Self.MEDECINS" />
+          <EntitySet Name="RV" EntityType="Self.RV" />
+          <AssociationSet Name="FK__RV__ID_CLIENT__2A4B4B5E" Association="Self.FK__RV__ID_CLIENT__2A4B4B5E">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="RV" EntitySet="RV" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CRENEAUX__ID_MED__276EDEB3" Association="Self.FK__CRENEAUX__ID_MED__276EDEB3">
+            <End Role="MEDECINS" EntitySet="MEDECINS" />
+            <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RV__ID_CRENEAU__2B3F6F97" Association="Self.FK__RV__ID_CRENEAU__2B3F6F97">
+            <End Role="CRENEAUX" EntitySet="CRENEAUX" />
+            <End Role="RV" EntitySet="RV" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBRDVMEDECINSModelStoreContainer" CdmEntityContainer="DBRDVMEDECINSEntities">
+          <EntitySetMapping Name="CLIENTS">
+            <EntityTypeMapping TypeName="DBRDVMEDECINSModel.CLIENTS">
+              <MappingFragment StoreEntitySet="CLIENTS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRENEAUX">
+            <EntityTypeMapping TypeName="DBRDVMEDECINSModel.CRENEAUX">
+              <MappingFragment StoreEntitySet="CRENEAUX">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HDEBUT" ColumnName="HDEBUT" />
+                <ScalarProperty Name="MDEBUT" ColumnName="MDEBUT" />
+                <ScalarProperty Name="HFIN" ColumnName="HFIN" />
+                <ScalarProperty Name="MFIN" ColumnName="MFIN" />
+                <ScalarProperty Name="ID_MEDECIN" ColumnName="ID_MEDECIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEDECINS">
+            <EntityTypeMapping TypeName="DBRDVMEDECINSModel.MEDECINS">
+              <MappingFragment StoreEntitySet="MEDECINS">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TITRE" ColumnName="TITRE" />
+                <ScalarProperty Name="NOM" ColumnName="NOM" />
+                <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RV">
+            <EntityTypeMapping TypeName="DBRDVMEDECINSModel.RV">
+              <MappingFragment StoreEntitySet="RV">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JOUR" ColumnName="JOUR" />
+                <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+                <ScalarProperty Name="ID_CRENEAU" ColumnName="ID_CRENEAU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

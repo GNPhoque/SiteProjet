@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteProjet", "SiteProjet\SiteProjet.csproj", "{F388A34A-77FE-4C72-8769-C5E4E0404CC1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{839DE4B8-F852-45CD-8260-C2912B10C121} = {839DE4B8-F852-45CD-8260-C2912B10C121}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteProjet.Tests", "SiteProjet.Tests\SiteProjet.Tests.csproj", "{5314DCE7-793B-4074-B187-057FA2AD3D3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceIMC", "..\WcfServiceIMC\WcfServiceIMC\WcfServiceIMC.csproj", "{839DE4B8-F852-45CD-8260-C2912B10C121}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{5314DCE7-793B-4074-B187-057FA2AD3D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5314DCE7-793B-4074-B187-057FA2AD3D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5314DCE7-793B-4074-B187-057FA2AD3D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839DE4B8-F852-45CD-8260-C2912B10C121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839DE4B8-F852-45CD-8260-C2912B10C121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839DE4B8-F852-45CD-8260-C2912B10C121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839DE4B8-F852-45CD-8260-C2912B10C121}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

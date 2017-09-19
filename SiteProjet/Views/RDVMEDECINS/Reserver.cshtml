@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Reserver";
+}
+@model List<SiteProjet.Models.LocalDB.CLIENTS>
+
+<h2>Cabinet médical - LES MEDECINS ASSOCIES</h2>
+
+<input type="button" value="Accueil" onclick="location.href='./Index'" />
+
+@{DateTime d = (DateTime)ViewData["jour"];}
+<p>Rendez-vous : @(ViewData["hDebut"])h@(ViewData["mDebut"])0-@(ViewData["hFin"])h@(ViewData["mFin"])0, Jour : @d.ToString("yyyy-MM-dd"), Médecin : @ViewData["titreMed"] @ViewData["nomMed"] @ViewData["prenomMed"]  </p>
+
+@using (Html.BeginForm())
+{
+    <label>Client</label>
+    <select name="idClient">
+        @foreach (var item in Model)
+        {
+            <option label="@item.TITRE  @item.NOM  @item.PRENOM">@item.ID</option>
+        }
+    </select>
+    <input hidden name="idMed" value="@ViewData["idMed"]" />
+    <input hidden name="hDebut" value="@ViewData["hDebut"]" />
+    <input hidden name="mDebut" value="@ViewData["mDebut"]" />
+    <input hidden name="hFin" value="@ViewData["hFin"]" />
+    <input hidden name="mFin" value="@ViewData["mFin"]" />
+    <input hidden name="jour" value="@d.ToString("yyyy-MM-dd")" />
+    <input type="submit" value="Valider" />
+    <input type="button" value="Annuler" onclick="location.href='./Index'" />
+}
+@using (Html.BeginForm("NouveauClient", "RDVMEDECINS", FormMethod.Get))
+{
+    <input hidden name="idMed" value="@ViewData["idMed"]" />
+    <input hidden name="hDebut" value="@ViewData["hDebut"]" />
+    <input hidden name="mDebut" value="@ViewData["mDebut"]" />
+    <input hidden name="hFin" value="@ViewData["hFin"]" />
+    <input hidden name="mFin" value="@ViewData["mFin"]" />
+    <input hidden name="jour" value="@d.ToString("yyyy-MM-dd")" />
+    <input type="submit" value="Nouveau Client" />
+}
